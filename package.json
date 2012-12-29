@@ -1,0 +1,32 @@
+{
+    "name": "prime-ext",
+    "homepage": "https://github.com/khrome/prime-ext",
+    "version": "0.0.1-alpha",
+    "main": "prime-ext.js",
+    "description": "Just a few utility functions for use with prime",
+    "keywords": [
+        "prime"
+    ],
+    "author": "Abbey Hawk Sparrow <@khrome> (http://patternweaver.com)",
+    "contributors": [],
+    "bugs": {
+        "url": "https://github.com/khrome/prime-ext/issues"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:khrome/prime-ext.git"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+        "mocha": "*",
+        "should": "*",
+        "prime" : "*"
+    },
+    "optionalDependencies": {
+    },
+    "engines": {
+        "node": "*"
+    }
+}

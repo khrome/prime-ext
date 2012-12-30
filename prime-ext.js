@@ -112,6 +112,12 @@ module.exports = function(object){
             object.contains = function(haystack, needle){ //parallel
                 return haystack.indexOf(needle) != -1;
             };
+            object.erase = function(arr, field){
+                var index;
+                while((arr.indexOf(field)) != -1){ //get 'em all
+                    arr.splice(index, 1); //delete the one we found
+                }
+            };
             break;
         case 'es5/function' :
             break;

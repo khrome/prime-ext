@@ -134,6 +134,37 @@ module.exports = function(object){
             object.endsWith = function(str, sub){
                 return str.substring(str.length-sub.length) === sub;
             };
+            object.startsWithAt = function(str, pos, sub){
+                return str.indexOf(sub, pos-1) === pos;
+            };
+            object.splitHonoringQuotes = function(str, delimiter, quotes) {
+                if(quotes == undefined) quotes = ['\'', '"'];
+                var results = [];
+                var inQuote = false;
+                var quote = null;
+                for(var lcv=0; lcv < str.length; lcv++){
+                    if(inQuote){
+                        if(str[lcv] == quote){
+                            inQuote = false;
+                            //results[results.length-1] += this[lcv];
+                            //results[results.length] = '';
+                        }else{
+                            results[results.length-1] += str.charAt(lcv);
+                        }
+                    }else{
+                        if(quotes.indexOf(str[lcv]) != -1){
+                            quote = str[lcv];
+                            //results[results.length-1] += this[lcv];
+                            inQuote = true;
+                        }else if(str[lcv] == delimiter){
+                            results[results.length] = '';
+                        }else{
+                            results[results.length-1] += str.charAt(lcv);
+                        }
+                    }
+                }
+                return results;
+            };
             break;
     }
     //console.log('prime', getType(object));

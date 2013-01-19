@@ -1,6 +1,9 @@
 var ext = require('./prime-ext');
 var prime = ext(require('prime'));
 var Class = require('Classy');
+var fs = require('fs');
+var fn = require('prime/es5/function');
+
 module.exports = new Class({
     configurations : {},
     getConfiguration : function(key){

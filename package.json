@@ -1,7 +1,7 @@
 {
     "name": "prime-ext",
     "homepage": "https://github.com/khrome/prime-ext",
-    "version": "0.0.3-alpha",
+    "version": "0.0.4-alpha",
     "main": "prime-ext.js",
     "description": "Just a few utility functions for use with prime",
     "keywords": [

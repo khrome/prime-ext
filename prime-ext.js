@@ -28,7 +28,7 @@ module.exports = function(object){
             object.interleave = function(data, object){
                 prime.each(data, function(item, key){
                     if(type(item) == 'object' && type(object[key]) == 'object') object[key] = prime.interleave(item, object[key]);
-                    else object[key] = item;
+                    else if(!object[key]) object[key] = item;
                 });
                 return prime.clone(object);
             };

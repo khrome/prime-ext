@@ -25,12 +25,44 @@ module.exports = function(object){
     };
     switch(getType(object)){
         case 'prime' :
-            object.interleave = function(data, object){
+            var clone = function(obj){
+                if(!obj) return;
+                var result;
+                if(obj.clone && type(obj.clone) == 'function') return obj.clone();
+                else 
+                switch(type(obj)){
+                    case 'object':
+                        result = {};
+                        for(var key in obj){
+                            result[key] = clone(obj[key]);
+                        }
+                        break;
+                    case 'array':
+                        result = obj.slice(0);
+                        break;
+                    default : result = obj;
+                }
+                return result;
+            };
+            object.interleave = function(data, ob){
+                ob = clone(ob);
                 prime.each(data, function(item, key){
-                    if(type(item) == 'object' && type(object[key]) == 'object') object[key] = prime.interleave(item, object[key]);
-                    else if(!object[key]) object[key] = item;
+                    if(type(item) == 'object' && type(ob[key]) == 'object') ob[key] = prime.interleave(item, ob[key]);
+                    else{
+                        if((!ob[key])) ob[key] = item;
+                    }
                 });
-                return prime.clone(object);
+                return ob;
+            };
+            object.union = function(data, ob){
+                var res = {};
+                prime.each(data, function(item, key){
+                    if((ob[key] || ob[key] === false) && (item || item === false)){
+                        if(type(item) == 'object' && type(ob[key]) == 'object') res[key] = prime.interleave(item, ob[key]);
+                        else res[key] = item;
+                    }
+                });
+                return res;
             };
             object.keys = function(object){
                 var result = [];
@@ -42,24 +74,7 @@ module.exports = function(object){
                 for(var key in object) result.push(object[key]);
                 return result;
             };
-            object.clone = function(obj){
-                var result;
-                if(obj.clone && type(obj.clone) == 'function') return obj.clone();
-                else 
-                switch(type(obj)){
-                    case 'object':
-                        result = {};
-                        for(var key in obj){
-                            result[key] = prime.clone(obj[key]);
-                        }
-                        break;
-                    case 'array':
-                        result = obj.slice(0);
-                        break;
-                    default : result = obj;
-                }
-                return result;
-            };
+            object.clone = clone;
             object.merge = function(objOne, objTwo){
                 var result = {};
                 prime.each(objOne, function(item, key){
@@ -95,7 +110,7 @@ module.exports = function(object){
                     a.count--;
                     if(a.count == 0 && complete) complete();
                 };
-                array.forEach(collection, function(value, key){
+                object.forEach(collection, function(value, key){
                     begin();
                     callback(value, key, function(){
                        finish(); 

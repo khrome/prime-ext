@@ -22,7 +22,7 @@
     "devDependencies": {
         "mocha": "*",
         "should": "*",
-        "prime" : "*"
+        "prime" : "0.0.5-alpha"
     },
     "optionalDependencies": {
     },

@@ -6,10 +6,10 @@ module.exports = function(object){
         'types/number' : ['toExponential', 'toFixed', 'toPrecision', 'limit', 'round', 'times', 'random'],
         'types/string' : ['trim', 'clean', 'camelize', 'hyphenate', 'escape', 'number'],
         'es5/array' : ['filter', 'indexOf', 'map', 'forEach', 'every', 'some', 'isArray'],
-        'es5/function' : ['apply', 'call', 'bind'],
         'es5/number' : ['toExponential', 'toFixed', 'toPrecision'],
         'es5/regexp' : ['test', 'exec'],
-        'es5/string' : ['trim']
+        'es5/string' : ['trim'],
+        'es5/function' : ['apply', 'call', 'bind']
     }
     var getType = function(object){
         var result;
@@ -23,6 +23,11 @@ module.exports = function(object){
         });
         return result;
     };
+    var keys = function(object){
+        var result = [];
+        for(var key in object) result.push(key);
+        return result;
+    }
     switch(getType(object)){
         case 'prime' :
             var clone = function(obj){
@@ -64,11 +69,7 @@ module.exports = function(object){
                 });
                 return res;
             };
-            object.keys = function(object){
-                var result = [];
-                for(var key in object) result.push(key);
-                return result;
-            };
+            object.keys = keys;
             object.values = function(object){
                 var result = [];
                 for(var key in object) result.push(object[key]);
@@ -133,6 +134,9 @@ module.exports = function(object){
                     arr.splice(index, 1); //delete the one we found
                 }
             };
+            object.clone = function(arr){
+                return arr.slice(0);
+            };
             break;
         case 'es5/function' :
             break;
@@ -151,6 +155,15 @@ module.exports = function(object){
             };
             object.startsWithAt = function(str, pos, sub){
                 return str.indexOf(sub, pos-1) === pos;
+            };
+            object.multiLineAppend = function(blockOne, blockTwo){
+                var linesOne = blockOne.split("\n");
+                var linesTwo = blockTwo.split("\n"); //todo: this should support many alignments
+                if(linesOne.length !== linesTwo.length) throw('blocks must have the same number of lines to be block appended');
+                array.forEach(linesOne, function(line, index){
+                    linesOne[index] += linesTwo[index];
+                });
+                return linesOne.join("\n");
             };
             object.splitHonoringQuotes = function(str, delimiter, quotes) {
                 if(quotes == undefined) quotes = ['\'', '"'];

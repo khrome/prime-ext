@@ -86,6 +86,15 @@ module.exports = function(object){
                 });
                 return result;
             };
+            object.map = function(ob, callback, excludeUndefined){
+                var result = {}
+                object.each(ob, function(item, index){
+                    res = callback(item, index, result);
+                    if(excludeUndefined && res === undefined) return;
+                    result[index] = res;
+                });
+                return result;
+            };
             break;
         case 'es5/array' :
             object.forEachEmission = function(collection, callback, complete){ //one at a time

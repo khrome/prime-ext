@@ -89,7 +89,7 @@ module.exports = function(object){
             object.map = function(ob, callback, excludeUndefined){
                 var result = {}
                 object.each(ob, function(item, index){
-                    res = callback(item, index, result);
+                    var res = callback(item, index, result);
                     if(excludeUndefined && res === undefined) return;
                     result[index] = res;
                 });

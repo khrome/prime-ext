@@ -30,6 +30,7 @@ module.exports = new Class({
             if(err) throw('Cannot find configuration file');
             data = JSON.parse(data);
             data = prime.interleave(data, this.configurations);
+            this.configurations = data;
             callback(data);
         }, this));
     }

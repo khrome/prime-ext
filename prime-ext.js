@@ -95,6 +95,13 @@ module.exports = function(object){
                 });
                 return result;
             };
+            object.filter = function(data, test, callback){
+                var results = {};
+                prime.each(data, function(item, key){
+                    if(test(key, item)) results[key] = item;
+                });
+                callback(results);
+            };
             break;
         case 'es5/array' :
             object.forEachEmission = function(collection, callback, complete){ //one at a time

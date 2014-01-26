@@ -1,7 +1,7 @@
 {
     "name": "prime-ext",
     "homepage": "https://github.com/khrome/prime-ext",
-    "version": "0.0.8-alpha",
+    "version": "0.1.0-beta",
     "main": "prime-ext.js",
     "description": "Just a few utility functions for use with prime",
     "keywords": [
@@ -18,11 +18,14 @@
         "url": "git@github.com:khrome/prime-ext.git"
     },
     "dependencies": {
+        "string-tools":"*",
+        "async-arrays":"*",
+        "async-objects":"*",
+        "prime" : "*"
     },
     "devDependencies": {
         "mocha": "*",
-        "should": "*",
-        "prime" : "0.0.5-alpha"
+        "should": "*"
     },
     "optionalDependencies": {
     },

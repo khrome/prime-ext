@@ -1,6 +1,6 @@
 var ext = require('./prime-ext');
 var prime = require('prime');
-var array = ext(require('prime/es5/array'));
+var array = ext(require('prime/array'));
 module.exports = {
     fileType : function(types){
         if(typeof types == 'string') types = types.split(',');

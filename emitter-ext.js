@@ -1,5 +1,5 @@
 var prime = require('prime');
-var Emitter = require('prime/util/emitter');
+var Emitter = require('prime/emitter');
 module.exports = prime({
     inherits: Emitter,
     once : function(type, fn){
